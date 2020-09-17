@@ -8,7 +8,15 @@
 <body>
 <h1>Weather forecast from openweather</h1>
 <div>Weather forecast</div>
+<p id="city"></p>
+<p id="weather"></p>
+<p id="temp"></p>
+<p id="wind"></p>
+<p id="direction"></p>
 <button>Update Weather Forecast</button>
+
+
+
 <!-- http://api.openweathermap.org/data/2.5/weather?zip=2000,dk&APPID=534cccd6bd0fcc47969301589853dbc8 -->
 <script>
     $(document).ready(function(){
@@ -16,13 +24,14 @@
             $.ajax({
                 type: "GET",
                 dataType: "jsonp",
-                url: "https://api.openweathermap.org/data/2.5/weather?zip=2000,dk&units=metric&APPID=534cccd6bd0fcc47969301589853dbc8",
+                url: "https://api.openweathermap.org/data/2.5/weather?zip=2300,dk&units=metric&APPID=b899ef1e4d32f64ec2ed6a4f1f7de195",
                 success: function(responseTxt, statusTxt, xhr) {
                     if (statusTxt == "success") {
                         //alert("External content loaded successfully!");
-
-                        alert(responseTxt.name + ":" + responseTxt.weather[0].description + " " + responseTxt.main.temp);
-
+                        //alert(responseTxt.name + ":" + responseTxt.weather[0].description + " " + responseTxt.main.temp);
+                        $("#city").text("By: " + responseTxt.name);
+                        $("#weather").text("Vejr: " + responseTxt.weather[0].description)
+                        $("#temp").text("Temperatur: " + responseTxt.main.temp)
 
                     }
                     if (statusTxt == "error")
